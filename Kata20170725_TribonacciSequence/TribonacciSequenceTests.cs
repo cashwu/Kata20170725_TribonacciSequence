@@ -10,17 +10,20 @@ namespace Kata20170725_TribonacciSequence
         [TestMethod]
         public void input_array_0_0_1_and_n_0_return_array_0()
         {
-            var xbonacci = new Xbonacci();
-            var acutal = xbonacci.Tribonacci(new double[] {0, 0, 1}, 0);
-            CollectionAssert.AreEqual(new double[]{ 0 }, acutal);
+            AssertSignatureShouldBe(new double[] {0, 0, 1}, 0, new double[] {0});
         }
 
         [TestMethod]
         public void input_array_0_0_1_and_n_1_return_array_0_0_1()
         {
+            AssertSignatureShouldBe(new double[] { 0, 0, 1 }, 3, new double[] { 0, 0, 1 });
+        }
+
+        private static void AssertSignatureShouldBe(double[] signature, int n, double[] expected)
+        {
             var xbonacci = new Xbonacci();
-            var acutal = xbonacci.Tribonacci(new double[] { 0, 0, 1 }, 3);
-            CollectionAssert.AreEqual(new double[] { 0, 0, 1 }, acutal);
+            var acutal = xbonacci.Tribonacci(signature, n);
+            CollectionAssert.AreEqual(expected, acutal);
         }
     }
 
