@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -26,6 +27,12 @@ namespace Kata20170725_TribonacciSequence
             AssertSignatureShouldBe(new double[] { 0, 0, 1 }, 4, new double[] { 0, 0, 1, 1 });
         }
 
+        [TestMethod]
+        public void input_array_0_0_1_and_n_5_return_array_0_0_1_1_2()
+        {
+            AssertSignatureShouldBe(new double[] { 0, 0, 1 }, 5, new double[] { 0, 0, 1, 1, 2 });
+        }
+
         private static void AssertSignatureShouldBe(double[] signature, int n, double[] expected)
         {
             var xbonacci = new Xbonacci();
@@ -47,10 +54,15 @@ namespace Kata20170725_TribonacciSequence
 
             for (int i = 0; i < n - 3; i++)
             {
-                result.Add(result[0] + result[1] + result[2]);                
+                result.Add(GetTribonacciItem(result, i));                
             }
 
             return result.ToArray();
+        }
+
+        private double GetTribonacciItem(List<double> result, int i)
+        {
+            return result[i] + result[i + 1] + result[i + 2];
         }
     }
 }
