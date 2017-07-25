@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Kata20170725_TribonacciSequence
 {
@@ -12,7 +9,13 @@ namespace Kata20170725_TribonacciSequence
         [TestMethod]
         public void input_array_0_0_1_and_n_0_return_array_0()
         {
-            AssertSignatureShouldBe(new double[] {0, 0, 1}, 0, new double[] {0});
+            AssertSignatureShouldBe(new double[] { 0, 0, 1 }, 0, new double[] { 0 });
+        }
+
+        [TestMethod]
+        public void input_array_0_0_1_and_n_1_return_array_0()
+        {
+            AssertSignatureShouldBe(new double[] { 0, 0, 1 }, 0, new double[] { 0 });
         }
 
         [TestMethod]
@@ -40,9 +43,15 @@ namespace Kata20170725_TribonacciSequence
         }
 
         [TestMethod]
-        public void input_array_1_1_1_and_n_4_return_array_1_1_1_3_5_9_17_31_57_105()
+        public void input_array_1_1_1_and_n_10_return_array_1_1_1_3_5_9_17_31_57_105()
         {
             AssertSignatureShouldBe(new double[] { 1, 1, 1 }, 10, new double[] { 1, 1, 1, 3, 5, 9, 17, 31, 57, 105 });
+        }
+
+        [TestMethod]
+        public void input_array_1_2_3_and_n_1_return_array_1()
+        {
+            AssertSignatureShouldBe(new double[] { 1, 2, 3 }, 1, new double[] { 1 });
         }
 
         private static void AssertSignatureShouldBe(double[] signature, int n, double[] expected)
@@ -62,19 +71,24 @@ namespace Kata20170725_TribonacciSequence
                 return new double[] { 0 };
             }
 
-            var result = signature.ToList();
+            var result = new List<double>();
 
-            for (int i = 0; i < n - 3; i++)
+            for (int i = 0; i < n; i++)
             {
-                result.Add(GetTribonacciItem(result, i));                
+                result.Add(GetTribonacciItem(signature, result, i));
             }
 
             return result.ToArray();
         }
 
-        private double GetTribonacciItem(List<double> result, int i)
+        private double GetTribonacciItem(double[] signature, List<double> result, int i)
         {
-            return result[i] + result[i + 1] + result[i + 2];
+            if (i < 3)
+            {
+                return signature[i];
+            }
+
+            return result[i - 1] + result[i - 2] + result[i - 3];
         }
     }
 }
