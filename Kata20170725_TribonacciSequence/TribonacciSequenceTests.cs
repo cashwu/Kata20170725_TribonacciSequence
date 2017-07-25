@@ -45,11 +45,6 @@ namespace Kata20170725_TribonacciSequence
 
             var result = signature.ToList();
 
-            if (n == 3)
-            {
-                return signature;
-            }
-
             for (int i = 0; i < n - 3; i++)
             {
                 result.Add(result[0] + result[1] + result[2]);                
